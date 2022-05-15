@@ -40,7 +40,7 @@ class OgretmenlerSayfasi extends ConsumerWidget {
                         Icons.download
                       ),
                       onPressed: (){
-                        ref.read(ogretmenlerProvider).download();
+                        ref.read(ogretmenlerProvider).indir();
                       },
                     ),
                   ),

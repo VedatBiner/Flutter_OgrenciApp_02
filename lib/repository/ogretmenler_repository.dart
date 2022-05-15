@@ -1,25 +1,22 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_ogrenciapp_02/services/data_service.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '../models/ogretmen.dart';
 
 class OgretmenlerRepository extends ChangeNotifier{
+  final DataService dataService;
 
   List ogretmenler = [
     Ogretmen("Faruk", "Yılmaz", 18, "Erkek"),
     Ogretmen("Semiha", "Çelik", 20, "Kadın")
   ];
 
-  void download() {
-    const j = """{
-      "ad" : "Ahmet",
-      "soyad" : "Eskicioğlu",
-      "yas" : 24,
-      "cinsiyet" : "Erkek"
-    }""";
-    final m = jsonDecode(j);
-    final ogretmen = Ogretmen.fromMap(m);
+  OgretmenlerRepository(this.dataService);
+
+  void indir() {
+    Ogretmen ogretmen = dataService.ogretmenIndir();
     ogretmenler.add(ogretmen);
     notifyListeners();
   }
@@ -28,6 +25,6 @@ class OgretmenlerRepository extends ChangeNotifier{
 
 final ogretmenlerProvider = ChangeNotifierProvider(
   (ref) {
-    return OgretmenlerRepository();
+    return OgretmenlerRepository(ref.watch(dataServiceProvider));
   }
-  );
+);
