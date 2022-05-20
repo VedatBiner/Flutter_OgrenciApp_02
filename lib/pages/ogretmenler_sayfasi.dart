@@ -33,16 +33,9 @@ class OgretmenlerSayfasi extends ConsumerWidget {
                       ),
                     ),
                   ),
-                  Align(
+                  const Align(
                     alignment: Alignment.centerRight,
-                    child: IconButton(
-                      icon: const Icon(
-                        Icons.download
-                      ),
-                      onPressed: (){
-                        ref.read(ogretmenlerProvider).indir();
-                      },
-                    ),
+                    child: OgretmenIndirmeButonu(),
                   ),
                 ],
               ),
@@ -63,6 +56,54 @@ class OgretmenlerSayfasi extends ConsumerWidget {
   }
 }
 
+class OgretmenIndirmeButonu extends StatefulWidget {
+  const OgretmenIndirmeButonu({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  State<OgretmenIndirmeButonu> createState() => _OgretmenIndirmeButonuState();
+}
+
+class _OgretmenIndirmeButonuState extends State<OgretmenIndirmeButonu> {
+  bool isLoading = false;
+  @override
+  Widget build(BuildContext context) {
+    return Consumer(
+      builder: (context, ref, child) {
+        return isLoading ? const CircularProgressIndicator() : IconButton(
+          icon: const Icon(
+              Icons.download
+          ),
+          onPressed: () async {
+            // TODO loading
+            // TODO error
+            try{
+              setState(() {
+                isLoading = true;
+              });
+              await ref.read(ogretmenlerProvider).indir();
+            } catch (e){
+              ScaffoldMessenger.of(context).showSnackBar(
+                SnackBar(
+                  content: Text(
+                    e.toString()
+                    ),
+                  )
+              );
+            }
+            finally {
+              setState(() {
+                isLoading = false;
+              });
+            }
+          },
+        );
+      }
+    );
+  }
+}
+
 class OgretmenSatiri extends StatelessWidget {
   final Ogretmen ogretmen;
   const OgretmenSatiri(this.ogretmen,{
@@ -73,7 +114,8 @@ class OgretmenSatiri extends StatelessWidget {
   Widget build(BuildContext context) {
     return ListTile(
       title: Text(
-          ogretmen.ad + " " + ogretmen.soyad),
+        "${ogretmen.ad} ${ogretmen.soyad}"
+      ),
       leading: IntrinsicWidth(
         child: Center(
           child: Text(

@@ -15,8 +15,8 @@ class OgretmenlerRepository extends ChangeNotifier{
 
   OgretmenlerRepository(this.dataService);
 
-  void indir() {
-    Ogretmen ogretmen = dataService.ogretmenIndir();
+  Future<void> indir() async {
+    Ogretmen ogretmen = await dataService.ogretmenIndir();
     ogretmenler.add(ogretmen);
     notifyListeners();
   }
