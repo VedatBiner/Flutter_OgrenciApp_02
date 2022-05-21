@@ -16,6 +16,10 @@ class DataService {
     }
   }
 
+  Future<void> ogretmenEkle(Ogretmen ogretmen) async {
+
+  }
+
 }
 
 final dataServiceProvider = Provider(

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '../models/ogretmen.dart';
 import '../repository/ogretmenler_repository.dart';
+import 'ogretmen/ogretmen_form.dart';
 
 class OgretmenlerSayfasi extends ConsumerWidget {
   const OgretmenlerSayfasi({Key? key}) : super(key: key);
@@ -40,7 +41,6 @@ class OgretmenlerSayfasi extends ConsumerWidget {
                 ],
               ),
             ),
-
             Expanded(
               child: ListView.separated(
                 itemBuilder: (context, index) => OgretmenSatiri(
@@ -51,6 +51,20 @@ class OgretmenlerSayfasi extends ConsumerWidget {
               ),
             ),
           ]
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: (){
+          Navigator.of(context).push(
+            MaterialPageRoute(
+              builder: (context){
+                return const OgretmenForm();
+              },
+            )
+          );
+        },
+        child: const Icon(
+          Icons.add
+        ),
       ),
     );
   }
