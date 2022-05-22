@@ -20,7 +20,6 @@ class OgretmenlerRepository extends ChangeNotifier{
     ogretmenler.add(ogretmen);
     notifyListeners();
   }
-
 }
 
 final ogretmenlerProvider = ChangeNotifierProvider(

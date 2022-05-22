@@ -53,14 +53,17 @@ class OgretmenlerSayfasi extends ConsumerWidget {
           ]
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: (){
-          Navigator.of(context).push(
+        onPressed: () async {
+          final created = await Navigator.of(context).push<bool>(
             MaterialPageRoute(
               builder: (context){
                 return const OgretmenForm();
               },
             )
           );
+          if (created == true) {
+            print("Öğretmenleri yenile !!!");
+          }
         },
         child: const Icon(
           Icons.add
@@ -140,4 +143,3 @@ class OgretmenSatiri extends StatelessWidget {
     );
   }
 }
-

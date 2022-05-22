@@ -9,4 +9,13 @@ class Ogretmen{
   Ogretmen.fromMap(Map<String, dynamic> m) : this(
     m["ad"], m["soyad"], m["yas"], m["cinsiyet"]
   );
+
+  Map toMap(){
+    return {
+      "ad": ad,
+      "soyad": soyad,
+      "yas": yas,
+      "cinsiyet": cinsiyet,
+    };
+  }
 }

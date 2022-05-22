@@ -15,6 +15,8 @@ class _OgretmenFormState extends ConsumerState<OgretmenForm> {
   final Map<String, dynamic> girilen = {};
   final _formKey = GlobalKey<FormState>();
 
+  bool isSaving = false;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -98,8 +100,9 @@ class _OgretmenFormState extends ConsumerState<OgretmenForm> {
                     return null; // Burası olmalı mı ?
                   },
                 ),
-                ElevatedButton(
-                  onPressed: () {
+                isSaving
+                  ? const Center(child: CircularProgressIndicator())
+                  : ElevatedButton(onPressed: () {
                     final formState = _formKey.currentState;
                     if (formState == null) return;
                     if (formState.validate() == true) {
@@ -119,6 +122,20 @@ class _OgretmenFormState extends ConsumerState<OgretmenForm> {
   }
 
   Future<void> _kaydet() async {
-    await ref.read(dataServiceProvider).ogretmenEkle(Ogretmen.fromMap(girilen));
+    try {
+      setState(() {
+        isSaving = true;
+      });
+      await ref.read(dataServiceProvider).ogretmenEkle(Ogretmen.fromMap(girilen));
+      Navigator.of(context).pop(true);
+    } catch (e) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text(e.toString())),
+      );
+    } finally {
+      setState(() {
+        isSaving = false;
+      });
+    }
   }
 }
