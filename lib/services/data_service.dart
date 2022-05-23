@@ -34,6 +34,21 @@ class DataService {
     }
   }
 
+  var i = 0;
+
+  Future<List<Ogretmen>> ogretmenleriGetir() async {
+    // http.get ile veriyi alıyoruz.
+    final response = await http.get(Uri.parse("$baseUrl/ogretmen"));
+
+    i++;
+    if (response.statusCode == (i < 4 ? 100 : 200)){
+      final l = jsonDecode(response.body);
+      return l.map<Ogretmen>((e) => Ogretmen.fromMap(e)).toList();
+    } else {
+      throw Exception("Öğretmenler Getirilemedi. ${response.statusCode}");
+    }
+  }
+
 }
 
 final dataServiceProvider = Provider(
