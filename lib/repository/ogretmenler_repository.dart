@@ -1,8 +1,6 @@
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
-import 'package:flutter_ogrenciapp_02/services/data_service.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:flutter_ogrenciapp_02/services/data_service.dart';
 import '../models/ogretmen.dart';
 
 class OgretmenlerRepository extends ChangeNotifier{

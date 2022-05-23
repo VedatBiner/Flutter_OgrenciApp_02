@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-
 import '../models/ogrenci.dart';
 
 class OgrencilerRepository extends ChangeNotifier{

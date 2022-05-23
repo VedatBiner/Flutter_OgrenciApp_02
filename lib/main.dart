@@ -1,14 +1,18 @@
 // Öğrenci Uygulaması, ekran tasarımları
 // API Servisi kullanımı
+// http post
+// http get
+// Liste çekmek
+// hata yaratıp, görmek
 
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:flutter_ogrenciapp_02/repository/ogrenciler_repository.dart';
+import 'package:flutter_ogrenciapp_02/repository/ogretmenler_repository.dart';
+import 'package:flutter_ogrenciapp_02/repository/mesajlar_repository.dart';
 import 'package:flutter_ogrenciapp_02/pages/mesajlar_sayfasi.dart';
 import 'package:flutter_ogrenciapp_02/pages/ogrenciler_sayfasi.dart';
 import 'package:flutter_ogrenciapp_02/pages/ogretmenler_sayfasi.dart';
-import 'package:flutter_ogrenciapp_02/repository/mesajlar_repository.dart';
-import 'package:flutter_ogrenciapp_02/repository/ogrenciler_repository.dart';
-import 'package:flutter_ogrenciapp_02/repository/ogretmenler_repository.dart';
 
 void main() {
   runApp(const ProviderScope(
